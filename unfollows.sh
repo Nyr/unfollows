@@ -71,13 +71,10 @@ grep -v 'jq: error: Cannot index array with string' $unfollowernames | grep . > 
 
 # If we matched some ids to screen names, send the mail
 if [[ -s $unfollowers ]] ; then
-	while read line; do
-		#blablabla
 	    echo "Hi $screen_name", > $mailtmp
 	    echo >> $mailtmp
 	    echo "The following people isn't following you any longer:" >> $mailtmp
 	    echo >> $mailtmp
 	    cat $unfollowers | sed -e 's#^#https://twitter.com/#' >> $mailtmp
 	    mail -a "From: $frommail" -s "Someone has unfollowed you" $mail < $mailtmp
-	done < $unfollowers
 fi
