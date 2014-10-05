@@ -53,9 +53,9 @@ cp $newids $oldids
 
 # If we got unfollowers, match their IDs with screen names
 if [[ -s $unfollowerids ]] ; then
+	# cleanup
+	rm -f $unfollowernames
 	while read line; do
-		# cleanup
-		rm -f $unfollowernames
 		# lookup the screen_name of the ids
 		lookup_url="https://api.twitter.com/1.1/users/lookup.json?user_id=$line"
 		lookup_oauth_sign=$($basedir/oauth_sign $consumer_key $consumer_key_secret $token $token_secret $method $lookup_url)      
